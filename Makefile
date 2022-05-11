@@ -33,7 +33,6 @@ terraform_plan:
 terraform_apply:
 	(	cd ./terraform; \
 		terraform apply; \
-		./change_ip.sh; \
 	)
 
 terraform_destroy:
