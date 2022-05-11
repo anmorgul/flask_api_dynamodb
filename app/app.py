@@ -16,15 +16,8 @@ def status():
 def add_items():
     data = request.get_json()
     response = controller.addItem(data['id'], data['model'], data['color'])
-    if (response['ResponseMetadata']['HTTPStatusCode'] == 200):
-        return {
-            'msg': 'Added successfully',
-        }
 
-    return {  
-        'msg': 'Some error occcured',
-        'response': response
-    }
+    return response
 
 #getItem 
 @app.route('/getItem/', methods = ['POST'])
@@ -32,17 +25,7 @@ def get_item():
     data = request.get_json()
     response = controller.GetItem(data['id'])
     
-    if (response['ResponseMetadata']['HTTPStatusCode'] == 200):
-        
-        if ('Item' in response):
-            return { 'Item': response['Item'] }
-
-        return { 'msg' : 'Item not found!' }
-
-    return {
-        'msg': 'Some error occured',
-        'response': response
-    }
+    return response
 
 #getItems
 @app.route('/getItems/', methods = ['POST', 'GET'])

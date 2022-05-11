@@ -22,17 +22,43 @@ def addItem(id, model, color):
             'color' : color
         }
     )
-    return response
+    if (response['ResponseMetadata']['HTTPStatusCode'] == 200):
+        return {
+            'msg': 'Added successfully',
+        }
+
+    return {  
+        'msg': 'Some error occcured',
+        'response': response
+    }
+    
 
 def GetItem(id):
-    response = MyTable.get_item(
-        Key = {
-            'id'     : id
-        },
-        AttributesToGet=[
-            'model', 'color'
-        ]
-    )
+    try:
+        response = MyTable.get_item(
+            Key = {
+                'id'     : id
+            },
+            AttributesToGet=[
+                'model', 'color'
+            ]
+        )
+        if (response['ResponseMetadata']['HTTPStatusCode'] == 200):
+            
+            if ('Item' in response):
+                return { 'Item': response['Item'] }
+
+            return { 'msg' : 'Item not found!' }
+
+        return {
+            'msg': 'Some error occured',
+            'response': response
+        }
+    except:
+        response = {
+        'msg': 'Some error occured',
+        'response': "DB not exist"
+    }
     return response
 
 def GetItems():
