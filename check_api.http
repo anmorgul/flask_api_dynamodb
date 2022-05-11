@@ -1,0 +1,21 @@
+###
+GET http://127.0.0.1:5000/status HTTP/1.1
+
+###
+PUT http://127.0.0.1:5000/addItem  HTTP/1.1
+content-type: application/json
+
+{
+    "model": "skoda",
+    "color": "red"
+}
+###
+POST http://127.0.0.1:5000/getItem HTTP/1.1
+content-type: application/json
+
+{
+    "item": "1"
+}
+
+###
+GET http://127.0.0.1:5000/getItems  HTTP/1.1
